@@ -1,13 +1,22 @@
 "use client";
 
+import { useRouter } from 'next/navigation';
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { handleRequest } from "@/utils/auth-helpers/client";
+import { signUp } from '@/utils/auth-helpers/server';
 
-export const LandingForm = (): React.JSX.Element => {
+type LandingFormProps = {
+  redirectMethod: 'client' | 'server';
+};
+
+export const LandingForm = ({ redirectMethod }: LandingFormProps): React.JSX.Element => {
+  const _router = useRouter();
+  const router = redirectMethod === 'client' ? _router : null;
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -16,6 +25,13 @@ export const LandingForm = (): React.JSX.Element => {
     confirmPassword: "",
     subscriptionType: "monthly",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsSubmitting(true); // Disable the button while the request is being handled
+    await handleRequest(e, signUp, router);
+    setIsSubmitting(false);
+  };  
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -25,7 +41,7 @@ export const LandingForm = (): React.JSX.Element => {
   return (
     <Card className="w-full max-w-md shadow-xl rounded-2xl p-6">
       <CardContent>
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleFormSubmit}>
           <div>
             <Label htmlFor="firstName">First Name</Label>
             <Input
@@ -99,7 +115,7 @@ export const LandingForm = (): React.JSX.Element => {
               </div>
             </RadioGroup>
           </div>          
-          <Button type="submit" className="w-full">I&apos;m in</Button>
+          <Button type="submit" className="w-full" disabled={isSubmitting}>I&apos;m in</Button>
         </form>
       </CardContent>
     </Card>
