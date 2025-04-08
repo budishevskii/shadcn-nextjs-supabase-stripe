@@ -65,6 +65,7 @@ export const LandingForm = ({ redirectMethod }: LandingFormProps): React.JSX.Ele
           <div>
             <Label htmlFor="email">Email</Label>
             <Input
+              autoComplete='email'
               id="email"
               name="email"
               type="email"
@@ -76,6 +77,7 @@ export const LandingForm = ({ redirectMethod }: LandingFormProps): React.JSX.Ele
           <div>
             <Label htmlFor="password">Password</Label>
             <Input
+              autoComplete='new-password'
               id="password"
               name="password"
               type="password"
@@ -87,6 +89,7 @@ export const LandingForm = ({ redirectMethod }: LandingFormProps): React.JSX.Ele
           <div>
             <Label htmlFor="confirmPassword">Confirm Password</Label>
             <Input
+              autoComplete='new-password'
               id="confirmPassword"
               name="confirmPassword"
               type="password"

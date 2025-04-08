@@ -1,11 +1,39 @@
-// import Image from "next/image";
-import { LandingForm } from '@/components/forms/landing-form';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import Link from 'next/link';
 
-export default function Home() {
+// import Image from "next/image";
+// import { LandingForm } from '@/components/forms/landing-form';
+
+export default function HomePage() {
+
+  return (
+    <main className="flex flex-col m-[32px] gap-[32px] row-start-2 items-center sm:items-start">
+      <Card className='w-full'>
+        <CardContent>
+          Home!
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati quibusdam ipsa voluptatum sunt corporis possimus. Pariatur, sit! Laboriosam iste libero accusantium dicta veritatis et, eum iusto pariatur expedita nulla suscipit!</p>
+        </CardContent>
+      </Card>
+      <div className="w-full flex gap-[32px] justify-center">
+        <Button asChild>
+          <Link href="/sign-up">Sign up</Link>
+        </Button>
+        <Button>Sign in</Button>
+      </div>
+      <Card className='w-full'>
+        <CardContent>
+          Another Card!
+        </CardContent>
+      </Card>
+    </main>
+  )
+
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <LandingForm />
+        {/* <LandingForm /> */}
         {/* <Image
           className="dark:invert"
           src="/next.svg"
