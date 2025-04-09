@@ -27,10 +27,15 @@ export const SignUpForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof signUpFormSchema>) {
+  const { formState: { isSubmitting } } = form;
+  
+  async function onSubmit(values: z.infer<typeof signUpFormSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+    console.log(values);
+
+    // mock submitting
+    await new Promise((resolve) => setTimeout(resolve, 5000));
   }  
   
   return (
@@ -78,7 +83,7 @@ export const SignUpForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Sign Up</Button>
+        <Button type="submit" disabled={isSubmitting} >Sign Up</Button>
       </form>
     </Form>
   );
